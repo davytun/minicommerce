@@ -2,6 +2,7 @@ import { Providers } from "./providers";
 import Header from "@/components/Header";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Mini-Commerce - Online Store for Furniture & Decor",
@@ -41,7 +42,9 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-white text-gray-900">
         <Providers>
           <Header />
-          <main className="pt-24 pb-8 flex-1">{children}</main>
+          <main className="pt-24 pb-8 flex-1">
+            {children} <ToastContainer />
+          </main>
           <Footer />
         </Providers>
       </body>

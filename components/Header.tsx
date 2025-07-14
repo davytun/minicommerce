@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
 import { useCartStore } from "@/stores/cart-store";
 import { useQueryClient } from "@tanstack/react-query";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Header() {
@@ -272,7 +272,7 @@ export default function Header() {
       </div>
 
       {/* Toast Container */}
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </header>
   );
 }

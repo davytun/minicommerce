@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Product {
@@ -144,7 +144,7 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }

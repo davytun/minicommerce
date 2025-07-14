@@ -8,19 +8,19 @@ const roomCategories = [
   {
     name: "Living Room",
     image: "/living-room.jpg",
-    link: "/shop/living-room",
+    link: "/shop",
     description: "Elevate your gathering spaces",
   },
   {
     name: "Bedroom",
     image: "/bedroom.jpg",
-    link: "/shop/bedroom",
+    link: "/shop",
     description: "Create your perfect sanctuary",
   },
   {
     name: "Kitchen",
     image: "/kitchen.jpg",
-    link: "/shop/kitchen",
+    link: "/shop",
     description: "Stylish and functional essentials",
   },
 ];
