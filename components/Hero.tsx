@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -67,12 +68,14 @@ export function Hero() {
                 visible: { y: 0, opacity: 1 },
               }}
             >
-              <Button
-                size="lg"
-                className="px-12 py-6 text-lg bg-white text-black hover:bg-white/90 hover:scale-105 transition-all"
-              >
-                Explore Collection
-              </Button>
+              <Link href="/shop">
+                <Button
+                  size="lg"
+                  className="px-12 py-6 text-lg bg-white text-black hover:bg-white/90 hover:scale-105 transition-all"
+                >
+                  Explore Collection
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

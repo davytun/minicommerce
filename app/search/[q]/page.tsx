@@ -34,7 +34,7 @@ const fetchSearchResults = async (
   const response = await fetch(url.toString());
   if (!response.ok) throw new Error("Failed to fetch search results");
   const data = await response.json();
-  return data.map((item) => ({
+  return data.map((item: Product) => ({
     ...item,
     slug: item.slug || item.name.toLowerCase().replace(/\s+/g, "-"),
   }));
