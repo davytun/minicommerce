@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 
 export const Footer = () => {
@@ -88,17 +89,16 @@ export const Footer = () => {
 
           <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-gray-500">
             <span>
-              © {new Date().getFullYear()} Copyright. All rights
-              reserved.
+              © {new Date().getFullYear()} Copyright. All rights reserved.
             </span>
             <div className="hidden md:block h-4 w-px bg-gray-300"></div>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-gray-900 transition-colors">
+              <Link href="#" className="hover:text-gray-900 transition-colors">
                 Privacy Policy
-              </a>
-              <a href="#" className="hover:text-gray-900 transition-colors">
+              </Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">
                 Terms of Service
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,3 @@
-// components/EcommerceHeader.tsx
 "use client";
 
 import Link from "next/link";
@@ -8,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
 import { useCartStore } from "@/stores/cart-store";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Header() {
   const router = useRouter();
@@ -26,7 +27,6 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isClient, setIsClient] = useState(false);
 
-  // Ensure we're on the client before rendering cart count
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -54,21 +54,25 @@ export default function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      // Invalidate any existing product queries and navigate to search
+    const trimmedQuery = searchQuery.trim();
+    if (trimmedQuery) {
+      console.log("Navigating to /search/", trimmedQuery); // Debug log
       queryClient.invalidateQueries({ queryKey: ["products"] });
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+      router.push(`/search/${encodeURIComponent(trimmedQuery)}`);
       setSearchQuery("");
       setSearchOpen(false);
+    } else {
+      toast.error("Please enter a search term.", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
     }
   };
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
-    { name: "Categories", path: "/categories" },
-    { name: "New Arrivals", path: "/new" },
-    { name: "Deals", path: "/deals" },
   ];
 
   return (
@@ -98,7 +102,7 @@ export default function Header() {
               whileTap={{ scale: 0.95 }}
               className="flex items-center"
             >
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-accent bg-clip-text text-transparent">
                 Mini-Commerce
               </span>
             </motion.div>
@@ -164,7 +168,7 @@ export default function Header() {
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                  className="absolute -top-1 -right-1 bg-gray-900 text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center"
                 >
                   {cartCount > 9 ? "9+" : cartCount}
                 </motion.span>
@@ -266,6 +270,9 @@ export default function Header() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer />
     </header>
   );
 }

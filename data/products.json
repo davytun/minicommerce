@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "slug": "wireless-headphones",
+    "name": "Wireless Headphones",
+    "price": 99.99,
+    "image": "/hero-1.jpg",
+    "description": "High-quality wireless headphones with noise cancellation."
+  },
+  {
+    "id": 2,
+    "slug": "smartphone",
+    "name": "Smartphone",
+    "price": 499.99,
+    "image": "/hero-2.jpg",
+    "description": "Latest model smartphone with 128GB storage."
+  },
+  {
+    "id": 3,
+    "slug": "laptop",
+    "name": "Laptop",
+    "price": 999.99,
+    "image": "/hero-3.jpg",
+    "description": "Powerful laptop with 16GB RAM and 512GB SSD."
+  },
+  {
+    "id": 4,
+    "slug": "smartwatch",
+    "name": "Smartwatch",
+    "price": 199.99,
+    "image": "/hero-1.jpg",
+    "description": "Fitness-tracking smartwatch with heart rate monitor."
+  },
+  {
+    "id": 5,
+    "slug": "bluetooth-speaker",
+    "name": "Bluetooth Speaker",
+    "price": 59.99,
+    "image": "/hero-2.jpg",
+    "description": "Portable Bluetooth speaker with excellent sound quality."
+  },
+  {
+    "id": 6,
+    "slug": "gaming-mouse",
+    "name": "Gaming Mouse",
+    "price": 49.99,
+    "image": "/hero-3.jpg",
+    "description": "Ergonomic gaming mouse with customizable buttons."
+  },
+  {
+    "id": 7,
+    "slug": "wireless-keyboard",
+    "name": "Wireless Keyboard",
+    "price": 79.99,
+    "image": "/hero-1.jpg",
+    "description": "Sleek wireless keyboard with backlighting."
+  },
+  {
+    "id": 8,
+    "slug": "tablet",
+    "name": "Tablet",
+    "price": 299.99,
+    "image": "/hero-2.jpg",
+    "description": "10-inch tablet with high-resolution display."
+  }
+]

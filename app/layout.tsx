@@ -1,6 +1,7 @@
 import { Providers } from "./providers";
 import Header from "@/components/Header";
 import "./globals.css";
+import { Footer } from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -13,6 +14,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main className="pt-24 pb-8">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
