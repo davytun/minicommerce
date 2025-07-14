@@ -118,7 +118,7 @@ export function NewArrivals() {
         </div>
 
         {/* Mobile (single card) */}
-        <div className="md:hidden relative h-[400px] overflow-hidden">
+        <div className="md:hidden relative h-[450px] overflow-hidden">
           <AnimatePresence custom={direction}>
             {products.length > 0 && (
               <motion.div
@@ -131,7 +131,8 @@ export function NewArrivals() {
                 transition={{ duration: 0.5 }}
                 className="absolute inset-0"
               >
-                <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm h-full mx-4">
+                <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm h-full mx-4 min-h-[400px]">
+                  
                   <span
                     className={`inline-block px-3 py-1 text-xs font-medium rounded-full mb-4 ${
                       products[currentIndex]?.tag === "50% OFF"
@@ -145,8 +146,8 @@ export function NewArrivals() {
                   >
                     {products[currentIndex]?.tag || "N/A"}
                   </span>
-
-                  <div className="relative h-64 mb-6">
+                  <div className="relative h-48 mb-6">
+                    
                     <Image
                       src={products[currentIndex].image}
                       alt={products[currentIndex].name}
@@ -155,12 +156,12 @@ export function NewArrivals() {
                       priority
                     />
                   </div>
-
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  <h3 className="text-lg font-medium text-gray-900 mb-2 line-clamp-2">
+                  
                     {products[currentIndex].name}
                   </h3>
-
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  
                     <div>
                       <span className="text-lg font-semibold text-gray-900">
                         ${products[currentIndex].price.toFixed(2)}
@@ -182,7 +183,6 @@ export function NewArrivals() {
               </motion.div>
             )}
           </AnimatePresence>
-
           <button
             onClick={prevSlide}
             className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md border border-gray-200 hover:bg-gray-50 transition-colors z-10"
@@ -190,7 +190,6 @@ export function NewArrivals() {
           >
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
-
           <button
             onClick={nextSlide}
             className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md border border-gray-200 hover:bg-gray-50 transition-colors z-10"
@@ -200,7 +199,7 @@ export function NewArrivals() {
           </button>
         </div>
 
-        {/* Desktop (three cards) */}
+        {/* Desktop card */}
         <div className="hidden md:block relative">
           <div className="grid grid-cols-3 gap-8">
             {products.length > 0 ? (
@@ -309,7 +308,6 @@ export function NewArrivals() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }
