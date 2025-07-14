@@ -20,7 +20,6 @@ export const Hero = () => {
 
       {/* Content */}
       <div className="relative max-w-6xl mx-auto px-4 py-32 md:py-48">
-        {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-sm text-white/80 mb-6">
           <Link href="/" className="hover:text-white transition-colors">
             Home

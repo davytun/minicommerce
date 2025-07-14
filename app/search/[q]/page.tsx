@@ -44,9 +44,8 @@ export default function SearchPage() {
   const params = useParams();
   const query = params.q as string;
 
-  // For now, hardcode minPrice and maxPrice; in a real app, these could come from UI inputs
-  const minPrice = 0; // Default to 0
-  const maxPrice = Infinity; // Default to no upper limit
+  const minPrice = 0;
+  const maxPrice = Infinity;
 
   const {
     data: results = [],

@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+```markdown
+# Mini-Commerce - E-Commerce Prototype
 
-## Getting Started
+![Demo Screenshot](/public/screenshot.png)
 
-First, run the development server:
+A client-side e-commerce prototype built with Next.js 14 (App Router) featuring product browsing, cart management, and mock checkout.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[Live Demo](https://minicommerce-seven.vercel.app/) 
+| [GitHub Repo](https://github.com/davytun/minicommerce)
+
+## Project Overview
+
+**Mini-Commerce** is a front-end prototype demonstrating:
+- Product catalogue from local JSON → localStorage
+- Persistent cart management with Zustand
+- Mock checkout flow
+- Full client-side state persistence
+
+Key technical features:
+- Next.js 14 App Router
+- TypeScript (strict mode)
+- React Query for data fetching
+- Zustand + localStorage persistence
+- Tailwind CSS styling
+- Responsive mobile-first layout
+
+### Accessibility
+- Semantic HTML5 tags (`main`, `section`, `article`)
+- Keyboard-navigable interactive elements
+- ARIA labels for cart actions
+- `next/image` with optimized alt texts
+
+## Tools & Techniques
+
+### Core Stack
+- **Next.js 14**: App Router, dynamic routes (`/product/[slug]`)
+- **React Query**: Catalogue data fetching with `useQuery`
+- **Zustand**: Cart store with `persist` middleware
+- **TypeScript**: Strict typing with zero `any` usage
+
+### State Management
+```typescript
+interface CartState {
+  items: CartItem[];
+  addItem: (product: Product) => void;
+  removeItem: (id: string) => void;
+  clearCart: () => void;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## SEO Strategy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Optimizations
+- Next.js default optimization for:
+  - Automatic image optimization (`next/image`)
+  - Prefetching for client-side navigation
+- Metadata in `layout.tsx`:
+  ```typescript
+  export const metadata = {
+    title: "Mini-Commerce | Modern E-Commerce Prototype",
+    description: "A demo e-commerce site built with Next.js",
+    openGraph: { }
+  }
+  ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Error Handling
 
-## Learn More
+### Scenarios Covered
+1. **Catalogue Fetch Failure**:
+   - React Query `error` state shows graceful message
+   - Auto-retry with exponential backoff
 
-To learn more about Next.js, take a look at the following resources:
+2. **Cart Operations**:
+   - Quantity validation (min: 1, max: 10)
+   - Empty cart state UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Routing**:
+   - 404 page for unknown routes
+   - Loading states during transitions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development Setup
 
-## Deploy on Vercel
+1. Install dependencies:
+```bash
+pnpm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Run development server:
+```bash
+pnpm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Run tests:
+```bash
+pnpm lint
+```
+
+## CI/CD
+- Pre-commit hooks (Husky) for:
+  - Type checking
+  - Linting (ESLint)
+  - Formatting (Prettier)
+
+```

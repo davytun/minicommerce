@@ -40,12 +40,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Focus search input when opened
   useEffect(() => {
     if (searchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
@@ -270,9 +268,6 @@ export default function Header() {
           )}
         </AnimatePresence>
       </div>
-
-      {/* Toast Container */}
-      {/* <ToastContainer /> */}
     </header>
   );
 }

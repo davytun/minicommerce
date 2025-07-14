@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import productsData from "@/data/products.json"; // Import JSON file
+import productsData from "@/data/products.json";
 import { Product } from "@/types/product";
 
 export async function GET(request: Request) {
@@ -10,7 +10,6 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "No products found" }, { status: 404 });
     }
 
-    // Extract search parameters from the request
     const { searchParams } = new URL(request.url);
     const q = searchParams.get("q")?.toLowerCase() || "";
     const minPrice = searchParams.get("minPrice")
@@ -30,7 +29,7 @@ export async function GET(request: Request) {
       const matchesPrice =
         product.price >= minPrice && product.price <= maxPrice;
 
-      return matchesQuery || (!q && matchesPrice); // Return all if no query, filtered by price if specified
+      return matchesQuery || (!q && matchesPrice);
     });
 
     return NextResponse.json(results, { status: 200 });
