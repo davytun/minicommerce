@@ -1,7 +1,7 @@
-```markdown
+```
 # Mini-Commerce - E-Commerce Prototype
 
-![Demo Screenshot](/public/screenshot.png)
+![Demo Screenshot]https://minicommerce-seven.vercel.app/screenshot.png
 
 A client-side e-commerce prototype built with Next.js 14 (App Router) featuring product browsing, cart management, and mock checkout.
 
@@ -10,7 +10,7 @@ A client-side e-commerce prototype built with Next.js 14 (App Router) featuring 
 
 ## Project Overview
 
-**Mini-Commerce** is a front-end prototype demonstrating:
+Mini-Commerce is a front-end prototype demonstrating:
 - Product catalogue from local JSON → localStorage
 - Persistent cart management with Zustand
 - Mock checkout flow
@@ -33,10 +33,10 @@ Key technical features:
 ## Tools & Techniques
 
 ### Core Stack
-- **Next.js 14**: App Router, dynamic routes (`/product/[slug]`)
-- **React Query**: Catalogue data fetching with `useQuery`
-- **Zustand**: Cart store with `persist` middleware
-- **TypeScript**: Strict typing with zero `any` usage
+- *Next.js 14*: App Router, dynamic routes (`/product/[slug]`)
+- *React Query*: Catalogue data fetching with `useQuery`
+- *Zustand*: Cart store with `persist` middleware
+- *TypeScript*: Strict typing with zero `any` usage
 
 ### State Management
 ```typescript
@@ -66,15 +66,15 @@ interface CartState {
 ## Error Handling
 
 ### Scenarios Covered
-1. **Catalogue Fetch Failure**:
+1. *Catalogue Fetch Failure*:
    - React Query `error` state shows graceful message
    - Auto-retry with exponential backoff
 
-2. **Cart Operations**:
+2. *Cart Operations*:
    - Quantity validation (min: 1, max: 10)
    - Empty cart state UI
 
-3. **Routing**:
+3. *Routing*:
    - 404 page for unknown routes
    - Loading states during transitions
 
