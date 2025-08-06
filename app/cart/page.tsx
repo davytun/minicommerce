@@ -32,6 +32,7 @@ export default function Cart() {
   const router = useRouter();
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const cartItemsWithDetails = items.map((item) => {
     const product = products.find((p) => p.id.toString() === item.id);
@@ -55,9 +56,23 @@ export default function Cart() {
     }
   };
 
-  const handleCheckout = () => {
-    clearCart();
+  const handleRemoveItem = async (id: string) => {
+    setIsLoading(true);
+    await removeItem(id);
+    setIsLoading(false);
+  };
+
+  const handleUpdateQuantity = async (id: string, quantity: number) => {
+    setIsLoading(true);
+    await updateQuantity(id, quantity);
+    setIsLoading(false);
+  };
+
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    await clearCart();
     router.push("/success?orderId=" + Math.floor(Math.random() * 1000000));
+    setIsLoading(false);
   };
 
   if (cartItemsWithDetails.length === 0) {
@@ -107,8 +122,9 @@ export default function Cart() {
                     <div>
                       <p className="font-medium">{item.name}</p>
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => handleRemoveItem(item.id)}
                         className="text-red-500 text-sm underline mt-1"
+                        disabled={isLoading}
                       >
                         Remove
                       </button>
@@ -118,21 +134,23 @@ export default function Cart() {
                     <div className="flex items-center justify-center gap-2">
                       <button
                         onClick={() =>
-                          updateQuantity(
+                          handleUpdateQuantity(
                             item.id,
                             Math.max(0, item.quantity - 1)
                           )
                         }
                         className="px-2 py-1 border rounded"
+                        disabled={isLoading}
                       >
                         -
                       </button>
                       <span>{item.quantity}</span>
                       <button
                         onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
+                          handleUpdateQuantity(item.id, item.quantity + 1)
                         }
                         className="px-2 py-1 border rounded"
+                        disabled={isLoading}
                       >
                         +
                       </button>

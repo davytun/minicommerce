@@ -9,6 +9,7 @@ import { useCartStore } from "@/stores/cart-store";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthStatus from "./ui/AuthStatus";
 
 export default function Header() {
   const router = useRouter();
@@ -147,13 +148,9 @@ export default function Header() {
             </button>
 
             {/* Account */}
-            <Link
-              href="/account"
-              className="p-2 text-foreground hover:bg-accent/10 rounded-full transition-colors hidden sm:block"
-              aria-label="Account"
-            >
-              <User size={20} />
-            </Link>
+            <div className="hidden sm:block">
+              <AuthStatus />
+            </div>
 
             {/* Cart with badge */}
             <Link
@@ -256,12 +253,9 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="border-t border-border mt-2 pt-2">
-                  <Link
-                    href="/account"
-                    className="px-4 py-3 rounded-md text-base font-medium text-foreground hover:bg-accent/10 flex items-center gap-2"
-                  >
-                    <User size={18} /> My Account
-                  </Link>
+                  <div className="px-4 py-3">
+                    <AuthStatus />
+                  </div>
                 </div>
               </nav>
             </motion.div>
