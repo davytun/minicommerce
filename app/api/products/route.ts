@@ -1,15 +1,59 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  QueryConstraint,
+} from "firebase/firestore";
 import { Product } from "@/types/product";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get("category");
+    const sort = searchParams.get("sort");
+    const price = searchParams.get("price");
+
     const productsCollection = collection(db, "products");
-    const productsSnapshot = await getDocs(productsCollection);
+    const queryConstraints: QueryConstraint[] = [];
+
+    if (category && category !== "All") {
+      queryConstraints.push(where("category", "==", category));
+    }
+
+    if (price) {
+      if (price === "under50") {
+        queryConstraints.push(where("price", "<", 50));
+      } else if (price === "50to150") {
+        queryConstraints.push(where("price", ">=", 50));
+        queryConstraints.push(where("price", "<=", 150));
+      } else if (price === "over150") {
+        queryConstraints.push(where("price", ">", 150));
+      }
+    }
+
+    if (sort) {
+      if (sort === "priceLow") {
+        queryConstraints.push(orderBy("price", "asc"));
+      } else if (sort === "priceHigh") {
+        queryConstraints.push(orderBy("price", "desc"));
+      } else if (sort === "newest") {
+        queryConstraints.push(orderBy("id", "desc"));
+      }
+    }
+
+    const productsQuery = query(productsCollection, ...queryConstraints);
+    const productsSnapshot = await getDocs(productsQuery);
     const products: Product[] = productsSnapshot.docs.map(
       (doc) => doc.data() as Product
     );
+
+    if (sort === "recommended") {
+      products.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    }
 
     if (!products || products.length === 0) {
       return NextResponse.json({ error: "No products found" }, { status: 404 });

@@ -19,20 +19,35 @@ interface Product {
   category: string;
 }
 
-const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch("/api/products");
+const fetchProducts = async (filters: {
+  category: string;
+  price: string;
+  sort: string;
+}): Promise<Product[]> => {
+  const params = new URLSearchParams();
+  params.append("category", filters.category);
+  params.append("sort", filters.sort);
+  params.append("price", filters.price);
+
+  const response = await fetch(`/api/products?${params.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch products");
   return await response.json();
 };
 
 export default function ProductCatalogue() {
+  const [filters, setFilters] = useState({
+    category: "All",
+    price: "all",
+    sort: "recommended",
+  });
+
   const {
     data: products = [],
     isLoading,
     error,
   } = useQuery<Product[], Error>({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
+    queryKey: ["products", filters],
+    queryFn: () => fetchProducts(filters),
   });
 
   const addItem = useCartStore((state) => state.addItem);
@@ -53,44 +68,7 @@ export default function ProductCatalogue() {
     { label: "Price: High to Low", value: "priceHigh" },
   ];
 
-  const [filters, setFilters] = useState({
-    category: "All",
-    price: "all",
-    sort: "recommended",
-  });
-
-  const filteredProducts = products
-    .map((product) => ({
-      ...product,
-      originalPrice: product.price * 1.2,
-      rating: Math.floor(Math.random() * 3) + 3,
-    }))
-    .filter((product) => {
-      if (filters.category !== "All" && product.category !== filters.category)
-        return false;
-      if (filters.price === "under50" && product.price >= 50) return false;
-      if (
-        filters.price === "50to150" &&
-        (product.price < 50 || product.price > 150)
-      )
-        return false;
-      if (filters.price === "over150" && product.price <= 150) return false;
-      return true;
-    })
-    .sort((a, b) => {
-      switch (filters.sort) {
-        case "newest":
-          return b.id - a.id;
-        case "priceLow":
-          return a.price - b.price;
-        case "priceHigh":
-          return b.price - a.price;
-        default:
-          return b.rating - a.rating;
-      }
-    });
-
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
+  const visibleProducts = products.slice(0, visibleCount);
 
   const handleAddToCart = (product: Product) => {
     addItem({
@@ -250,7 +228,7 @@ export default function ProductCatalogue() {
         })}
       </div>
 
-      {visibleCount < filteredProducts.length && (
+      {visibleCount < products.length && (
         <div className="mt-10 text-center">
           <button
             onClick={() => setVisibleCount((prev) => prev + 8)}
