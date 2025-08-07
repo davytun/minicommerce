@@ -27,9 +27,6 @@ export async function GET(request: Request) {
     if (price) {
       if (price === "under50") {
         queryConstraints.push(where("price", "<", 50));
-      } else if (price === "50to150") {
-        queryConstraints.push(where("price", ">=", 50));
-        queryConstraints.push(where("price", "<=", 150));
       } else if (price === "over150") {
         queryConstraints.push(where("price", ">", 150));
       }
@@ -47,9 +44,15 @@ export async function GET(request: Request) {
 
     const productsQuery = query(productsCollection, ...queryConstraints);
     const productsSnapshot = await getDocs(productsQuery);
-    const products: Product[] = productsSnapshot.docs.map(
+    let products: Product[] = productsSnapshot.docs.map(
       (doc) => doc.data() as Product
     );
+
+    if (price === "50to150") {
+      products = products.filter(
+        (product) => product.price >= 50 && product.price <= 150
+      );
+    }
 
     if (sort === "recommended") {
       products.sort((a, b) => (b.rating || 0) - (a.rating || 0));
