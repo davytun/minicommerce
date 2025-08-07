@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -19,8 +18,10 @@ const LoginPage = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       router.push("/");
-    } catch (error: any) {
-      setError(error.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
     }
   };
 
@@ -28,8 +29,10 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       router.push("/");
-    } catch (error: any) {
-      setError(error.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
     }
   };
 

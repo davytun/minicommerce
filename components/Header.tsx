@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ShoppingCart, User, X, Menu } from "lucide-react";
+import { Search, ShoppingCart, X, Menu } from "lucide-react";
 import { useCartStore } from "@/stores/cart-store";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
